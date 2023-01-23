@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     ActivityResultLauncher<Intent> someActivityResultLauncher2;
     public static int RC_PHOTO_PICKER = 0;
     static final int REQUEST_IMAGE_CAPTURE = 1;
+    Uri photoURI;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,10 +54,10 @@ public class MainActivity extends AppCompatActivity {
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
                     public void onActivityResult(ActivityResult result) {
-                        Bundle extras = result.getData().getExtras();
-                        Bitmap imageBitmap = (Bitmap) extras.get("data");
+                        /*Bundle extras = result.getData().getExtras();
+                        Bitmap imageBitmap = (Bitmap) extras.get("data");*/
                         ImageView img = findViewById(R.id.img);
-                        img.setImageBitmap(imageBitmap);
+                        img.setImageURI(photoURI);
                     }
                 });
         Button button = findViewById(R.id.buttonGallery);
@@ -122,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(this,
+                photoURI = FileProvider.getUriForFile(this,
                         "com.example.CapturaImatge2.fileprovider",
                         photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
