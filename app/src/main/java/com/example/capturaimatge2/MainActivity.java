@@ -54,11 +54,10 @@ public class MainActivity extends AppCompatActivity {
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
                     public void onActivityResult(ActivityResult result) {
-                        Bundle extras = result.getData().getExtras();
-                        Bitmap imageBitmap = (Bitmap) extras.get("data");
+                        /*Bundle extras = result.getData().getExtras();
+                        Bitmap imageBitmap = (Bitmap) extras.get("data");*/
                         ImageView img = findViewById(R.id.img);
-                        img.setImageBitmap(imageBitmap);
-                        //img.setImageURI(photoURI);
+                        img.setImageURI(photoURI);
                     }
                 });
         Button button = findViewById(R.id.buttonGallery);
@@ -71,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openSomeActivityForResult2(findViewById(R.id.img));
-                //dispatchTakePictureIntent();
+                //openSomeActivityForResult2(findViewById(R.id.img));
+                dispatchTakePictureIntent();
             }
         });
 
@@ -93,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         //ImageView img = findViewById(R.id.img);
         someActivityResultLauncher2.launch(intent);
     }
-/*
+
     String currentPhotoPath;
     private File createImageFile() throws IOException {
         // Create an image file name
@@ -102,9 +101,9 @@ public class MainActivity extends AppCompatActivity {
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
-               // ".jpg",         /* suffix */
-                //storageDir      /* directory */
-        /*);
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
 
         // Save a file: path for use with ACTION_VIEW intents
         currentPhotoPath = image.getAbsolutePath();
@@ -139,5 +138,5 @@ public class MainActivity extends AppCompatActivity {
         Uri contentUri = Uri.fromFile(f);
         mediaScanIntent.setData(contentUri);
         this.sendBroadcast(mediaScanIntent);
-    }*/
+    }
 }
